@@ -1,0 +1,26 @@
+sae-site SANJOSE {
+        service-chain E2E_CSR_ASA_CSR {
+                deployment-name ND_CSR_ASA_CSR_E2E;
+                type            end-to-end;
+                consumer-end-point CONSUMER20 {
+                        connectivity FACING_CONSUMER_SAPD {
+                                ip 20.20.20.20 {
+                                        vnf-profile P_CSR1;
+                                }
+                                ip 20.20.20.21 {
+                                        vnf-profile P_CSR2;
+                                }
+                        }
+                }
+                provider-end-point PROVIDER200 {
+                        connectivity FACING_PROVIDER_SAPD {
+                                ip 200.200.200.200 {
+                                        vnf-profile P_CSR3;
+                                }
+                                ip 200.200.200.201 {
+                                        vnf-profile P_CSR4;
+                                }
+                        }
+                }
+        }
+}

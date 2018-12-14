@@ -1,0 +1,172 @@
+ciscoasa# show running-config
+: Saved
+
+:
+: Serial Number: 9A88P7DSKKA
+: Hardware:   ASAv, 4096 MB RAM, CPU Lynnfield 2194 MHz, 1 CPU (4 cores)
+:
+ASA Version 9.9(2)
+!
+terminal width 511
+hostname ciscoasa
+enable password $sha512$5000$3e2ifYNLFYXSTxq3s4g10A==$wutfCC1rUVA5EiSq2VRlbQ== pbkdf2
+!
+license smart
+ feature tier standard
+ throughput level 2G
+names
+
+!
+interface GigabitEthernet0/0
+ description LAN Failover Interface
+!
+interface Management0/0
+ description int-mgmt-net
+ management-only
+ nameif management
+ security-level 100
+ ip address 9.9.77.1 255.255.0.0 standby 9.9.77.4
+!
+interface TenGigabitEthernet0/0
+ nameif INSIDE
+ security-level 100
+ ip address 100.10.20.20 255.255.255.248 standby 100.10.20.18
+!
+interface TenGigabitEthernet0/1
+ nameif OUTSIDE
+ security-level 0
+ ip address 100.10.20.11 255.255.255.248 standby 100.10.20.9
+!
+ftp mode passive
+clock timezone PST -8
+dns domain-lookup management
+dns server-group DefaultDNS
+ name-server 171.70.168.183
+ name-server 173.36.131.10
+access-list ALL extended permit ip any any
+pager lines 23
+mtu management 1500
+mtu INSIDE 1500
+mtu OUTSIDE 1500
+failover
+failover lan unit primary
+failover lan interface FAILOVER GigabitEthernet0/0
+failover interface ip FAILOVER 100.10.20.2 255.255.255.248 standby 100.10.20.1
+icmp unreachable rate-limit 1 burst-size 1
+no asdm history enable
+arp timeout 14400
+no arp permit-nonconnected
+arp rate-limit 16384
+access-group ALL in interface OUTSIDE
+router bgp 430000
+ bgp log-neighbor-changes
+ bgp router-id 9.9.77.1
+ address-family ipv4 unicast
+  neighbor 100.10.20.10 remote-as 430002
+  neighbor 100.10.20.10 activate
+  neighbor 100.10.20.12 remote-as 430002
+  neighbor 100.10.20.12 activate
+  neighbor 100.10.20.17 remote-as 430001
+  neighbor 100.10.20.17 activate
+  neighbor 100.10.20.19 remote-as 430001
+  neighbor 100.10.20.19 activate
+  network 100.10.20.16 mask 255.255.255.248
+  maximum-paths 2
+  no auto-summary
+  no synchronization
+ exit-address-family
+!
+route management 0.0.0.0 0.0.0.0 9.9.9.1 1
+timeout xlate 3:00:00
+timeout pat-xlate 0:00:30
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
+timeout tcp-proxy-reassembly 0:01:00
+timeout floating-conn 0:00:00
+timeout conn-holddown 0:00:15
+timeout igp stale-route 0:01:10
+user-identity default-domain LOCAL
+aaa authentication ssh console LOCAL
+aaa authorization exec LOCAL
+aaa authorization http console LOCAL
+aaa authentication login-history
+no snmp-server location
+no snmp-server contact
+crypto ipsec security-association pmtu-aging infinite
+crypto ca trustpoint _SmartCallHome_ServerCA
+ no validation-usage
+ crl configure
+crypto ca trustpool policy
+ auto-import
+crypto ca certificate chain _SmartCallHome_ServerCA
+ certificate ca 513fb9743870b73440418d30930699ff
+    30820538 30820420 a0030201 02021051 3fb97438 70b73440 418d3093 0699ff30
+    0d06092a 864886f7 0d01010b 05003081 ca310b30 09060355 04061302 55533117\
+telnet timeout 5
+ssh stricthostkeycheck
+ssh 0.0.0.0 0.0.0.0 management
+ssh timeout 5
+ssh version 2
+ssh key-exchange group dh-group14-sha1
+console timeout 0
+threat-detection basic-threat
+threat-detection statistics access-list
+no threat-detection statistics tcp-intercept
+dynamic-access-policy-record DfltAccessPolicy
+username admin password $sha512$5000$gpC66jTyUqvspPjZXXGZVw==$VAJaE8eTYaK8ukfT98StAA== pbkdf2 privilege 15
+!
+class-map inspection_default
+ match default-inspection-traffic
+!
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum client auto
+  message-length maximum 512
+  no tcp-inspection
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map
+  inspect ftp
+  inspect h323 h225
+  inspect h323 ras
+  inspect rsh
+  inspect rtsp
+  inspect esmtp
+  inspect sqlnet
+  inspect skinny
+  inspect sunrpc
+  inspect xdmcp
+  inspect sip
+  inspect netbios
+  inspect tftp
+  inspect ip-options
+policy-map type inspect dns migrated_dns_map_2
+ parameters
+  message-length maximum client auto
+  message-length maximum 512
+  no tcp-inspection
+policy-map type inspect dns migrated_dns_map_1
+ parameters
+  message-length maximum client auto
+  message-length maximum 512
+  no tcp-inspection
+!
+service-policy global_policy global
+prompt hostname context
+service call-home
+call-home
+ source-interface management
+ profile CiscoTAC-1
+  destination address http https://tools.cisco.com/its/service/oddce/services/DDCEService
+  destination address email callhome@cisco.com
+  destination address http https://sch-alpha.cisco.com/its/service/oddce/services/DDCEService
+  destination transport-method http
+ profile License
+  destination address http https://sch-alpha.cisco.com/its/service/oddce/services/DDCEService
+  destination transport-method http
+Cryptochecksum:baa3da672472aba2af714e01f642b86a
+: end
+ciscoasa#

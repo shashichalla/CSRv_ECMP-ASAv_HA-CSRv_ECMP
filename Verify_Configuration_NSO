@@ -1,0 +1,67 @@
+
+                                           BACK
+NAME                    TYPE               TRACK  STATE                  STATUS   WHEN                 MESSAGE                                                  ERR-CODE
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SAE-SITE-SANJOSE        self               -      init                   reached  2018-11-13T16:17:27  -                                                        -
+                                                  ready                  reached  2018-11-20T19:52:54  -                                                        -
+csp-202                 config-deployment  -      init                   reached  2018-11-13T16:37:14  -                                                        -
+                                                  ready                  reached  2018-11-13T16:37:14  CSP Day1 Config Applied                                  -
+csp-201                 config-deployment  -      init                   reached  2018-11-13T16:37:14  -                                                        -
+                                                  ready                  reached  2018-11-13T16:37:14  CSP Day1 Config Applied                                  -
+VNFM-ESC-ESC-0          vm-deployment      -      init                   reached  2018-11-13T16:52:38  -                                                        -
+                                                  ready                  reached  2018-11-13T16:52:39  Netconf subscription, tenant & csp vim settings created  -
+E2E_CSR_ASA_CSR         nsd-deployment     -      init                   reached  2018-11-20T19:41:51  -                                                        -
+                                                  placement              reached  2018-11-20T19:41:53  -                                                        -
+                                                  resource-allocation    reached  2018-11-20T19:41:55  -                                                        -
+                                                  vnfs-deployed          reached  2018-11-20T19:52:24  -                                                        -
+                                                  ready                  reached  2018-11-20T19:52:24  Service Chain created                                    -
+E2E_CSR_ASA_CSR-P_ASA1  vm-deployment      -      init                   reached  2018-11-20T19:42:01  -                                                        -
+                                                  placement              reached  2018-11-20T19:42:01  Selected csp: csp-201                                    -
+                                                  image-ready            reached  2018-11-20T19:42:06  -                                                        -
+                                                  vm-deployed            reached  2018-11-20T19:45:32  VNF is deployed                                          -
+                                                  switch-configurations  reached  2018-11-20T19:43:08  -                                                        -
+                                                  vm-alive               reached  2018-11-20T19:51:53  -                                                        -
+                                                  day1-configurations    reached  2018-11-20T19:51:56  No Day1 specified in catalog for this VNF                -
+                                                  ready                  reached  2018-11-20T19:51:56  -                                                        -
+E2E_CSR_ASA_CSR-P_ASA2  vm-deployment      -      init                   reached  2018-11-20T19:42:01  -                                                        -
+                                                  placement              reached  2018-11-20T19:42:01  Selected csp: csp-202                                    -
+                                                  image-ready            reached  2018-11-20T19:42:08  -                                                        -
+                                                  vm-deployed            reached  2018-11-20T19:45:49  VNF is deployed                                          -
+                                                  switch-configurations  reached  2018-11-20T19:43:08  -                                                        -
+                                                  vm-alive               reached  2018-11-20T19:52:22  -                                                        -
+                                                  day1-configurations    reached  2018-11-20T19:52:24  No Day1 specified in catalog for this VNF                -
+                                                  ready                  reached  2018-11-20T19:52:24  -                                                        -
+E2E_CSR_ASA_CSR-P_CSR1  vm-deployment      -      init                   reached  2018-11-20T19:42:00  -                                                        -
+                                                  placement              reached  2018-11-20T19:42:00  Selected csp: csp-201                                    -
+                                                  image-ready            reached  2018-11-20T19:42:04  -                                                        -
+                                                  vm-deployed            reached  2018-11-20T19:43:52  VNF is deployed                                          -
+                                                  switch-configurations  reached  2018-11-20T19:42:22  -                                                        -
+                                                  vm-alive               reached  2018-11-20T19:46:00  -                                                        -
+                                                  day1-configurations    reached  2018-11-20T19:46:05  No Day1 specified in catalog for this VNF                -
+                                                  ready                  reached  2018-11-20T19:46:05  -                                                        -
+E2E_CSR_ASA_CSR-P_CSR2  vm-deployment      -      init                   reached  2018-11-20T19:42:01  -                                                        -
+                                                  placement              reached  2018-11-20T19:42:01  Selected csp: csp-202                                    -
+                                                  image-ready            reached  2018-11-20T19:42:05  -                                                        -
+                                                  vm-deployed            reached  2018-11-20T19:44:19  VNF is deployed                                          -
+                                                  switch-configurations  reached  2018-11-20T19:42:22  -                                                        -
+                                                  vm-alive               reached  2018-11-20T19:46:31  -                                                        -
+                                                  day1-configurations    reached  2018-11-20T19:46:35  No Day1 specified in catalog for this VNF                -
+                                                  ready                  reached  2018-11-20T19:46:36  -                                                        -
+E2E_CSR_ASA_CSR-P_CSR3  vm-deployment      -      init                   reached  2018-11-20T19:42:01  -                                                        -
+                                                  placement              reached  2018-11-20T19:42:01  Selected csp: csp-201                                    -
+                                                  image-ready            reached  2018-11-20T19:42:07  -                                                        -
+                                                  vm-deployed            reached  2018-11-20T19:44:49  VNF is deployed                                          -
+                                                  switch-configurations  reached  2018-11-20T19:42:22  -                                                        -
+                                                  vm-alive               reached  2018-11-20T19:47:01  -                                                        -
+                                                  day1-configurations    reached  2018-11-20T19:47:04  No Day1 specified in catalog for this VNF                -
+                                                  ready                  reached  2018-11-20T19:47:04  -                                                        -
+E2E_CSR_ASA_CSR-P_CSR4  vm-deployment      -      init                   reached  2018-11-20T19:42:01  -                                                        -
+                                                  placement              reached  2018-11-20T19:42:01  Selected csp: csp-202                                    -
+                                                  image-ready            reached  2018-11-20T19:42:09  -                                                        -
+                                                  vm-deployed            reached  2018-11-20T19:45:20  VNF is deployed                                          -
+                                                  switch-configurations  reached  2018-11-20T19:42:22  -                                                        -
+                                                  vm-alive               reached  2018-11-20T19:47:30  -                                                        -
+                                                  day1-configurations    reached  2018-11-20T19:47:31  No Day1 specified in catalog for this VNF                -
+                                                  ready                  reached  2018-11-20T19:47:31  -                                                        -
+
+[ok][2018-11-20 11:53:15]
